@@ -33,17 +33,21 @@ public class MainActivity extends AppCompatActivity {
 
         final String API_KEY = BuildConfig.BRIDGEFY_KEY;
 
+        Log.d("Bridgefy", "API_KEY: " + API_KEY);
+
         // Always use the Application context to avoid leaks
         Bridgefy.initialize(getApplicationContext(), API_KEY, new RegistrationListener() {
             @Override
             public void onRegistrationSuccessful(BridgefyClient bridgefyClient) {
                 // Bridgefy is ready to start
                 Bridgefy.start(messageListener, stateListener);
+                Log.e("Bridgefy", "Bridgefy is ready to start");
             }
 
             @Override
             public void onRegistrationFailed(int errorCode, String message) {
                 // Something went wrong: handle error code, maybe print the message
+                Log.e("Bridgefy", "onRegistrationFailed: " + message);
             }
         });
     }

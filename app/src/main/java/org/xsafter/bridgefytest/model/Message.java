@@ -2,6 +2,7 @@ package org.xsafter.bridgefytest.model;
 
 import com.google.gson.Gson;
 
+
 public class Message implements DataMessage {
     private String text;
     private int direction;
