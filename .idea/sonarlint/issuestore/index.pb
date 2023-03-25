@@ -14,5 +14,7 @@ A
 local.properties,0/7/0712df971a99ac4d2fccb8e0fb19f377f3374cca
 ?
 settings.gradle,0/5/05efc8b1657769a27696d478ded1e95f38737233
-j
-:app/src/main/java/org/xsafter/bridgefytest/model/Peer.java,4/5/45da6b13a35030329ae67bc30fff4f9c340bab75
+u
+Eapp/src/main/java/org/xsafter/bridgefytest/adapters/ChatsAdapter.java,3/f/3ff491d932ec560d1ea1e796546b52be2ff56504
+@
+app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164

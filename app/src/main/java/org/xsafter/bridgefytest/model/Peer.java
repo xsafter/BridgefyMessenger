@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 
 import com.google.gson.Gson;
 
-@Entity
+@Entity(tableName = "peers")
 public class Peer {
     public enum DeviceType {
         UNDEFINED,
@@ -18,6 +18,8 @@ public class Peer {
     @ColumnInfo(name = "device_name")
     private String deviceName;
     @PrimaryKey
+    @ColumnInfo(name = "uuid")
+    @NonNull
     private String uuid;
     @ColumnInfo(name = "nearby")
     private boolean isNearby;

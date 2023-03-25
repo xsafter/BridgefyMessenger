@@ -1,15 +1,21 @@
 package org.xsafter.bridgefytest;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.bridgefy.sdk.client.Bridgefy;
@@ -26,6 +32,9 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
+    TextView textView;
+    String text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +44,16 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("Bridgefy", "API_KEY: " + API_KEY);
 
+        textView = findViewById(R.id.textView2);
+
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_DENIED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 2);
+                Toast.makeText(this, "Please grant permission to use Bluetooth", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+
         // Always use the Application context to avoid leaks
         Bridgefy.initialize(getApplicationContext(), API_KEY, new RegistrationListener() {
             @Override
@@ -42,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
                 // Bridgefy is ready to start
                 Bridgefy.start(messageListener, stateListener);
                 Log.e("Bridgefy", "Bridgefy is ready to start");
+                text += "Bridgefy started\n";
+                runOnUiThread(
+                    () -> textView.setText(text)
+                );
             }
 
             @Override
@@ -63,12 +86,20 @@ public class MainActivity extends AppCompatActivity {
                 peer.setDeviceType(extractType(message));
                 //peersAdapter.addPeer(peer);
                 Log.d("Peer", "Peer introduced itself: " + peer.getDeviceName());
+                text += "Peer introduced itself: " + peer.getDeviceName() + "\n";
+                runOnUiThread(
+                        () -> textView.setText(text)
+                );
             } else {
                 String incomingMessage = (String) message.getContent().get("text");
                 Log.d("Message", "Incoming private message: " + incomingMessage);
                 LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(
                         new Intent(message.getSenderId())
                                 .putExtra("message", incomingMessage));
+                text += "Incoming private message: " + incomingMessage + "\n";
+                runOnUiThread(
+                        () -> textView.setText(text)
+                );
             }
         }
 
@@ -81,6 +112,11 @@ public class MainActivity extends AppCompatActivity {
             Peer.DeviceType deviceType = extractType(message);
 
             Log.d("Broadcast", "Incoming broadcast message: " + incomingMsg);
+            text += "Incoming broadcast message: " + incomingMsg + "\n";
+            runOnUiThread(
+                    () -> textView.setText(text)
+            );
+            text += deviceName + ": " + incomingMsg + "\n";
             LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(
                     new Intent("Broadcast")
                             .putExtra("peerName", deviceName)

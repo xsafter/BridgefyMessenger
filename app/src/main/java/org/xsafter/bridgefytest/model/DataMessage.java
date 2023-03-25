@@ -6,5 +6,7 @@ public interface DataMessage {
         OUTGOING_MESSAGE
     }
 
+    public String toString();
+
 
 }
