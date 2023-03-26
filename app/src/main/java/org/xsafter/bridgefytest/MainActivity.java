@@ -16,6 +16,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.bridgefy.sdk.client.Bridgefy;
@@ -26,6 +27,7 @@ import com.bridgefy.sdk.client.MessageListener;
 import com.bridgefy.sdk.client.RegistrationListener;
 import com.bridgefy.sdk.client.StateListener;
 
+import org.xsafter.bridgefytest.ViewModels.MessagesViewModel;
 import org.xsafter.bridgefytest.model.Peer;
 
 import java.util.HashMap;
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView textView;
     String text;
+    
+    MessagesViewModel messagesViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
             public void onRegistrationFailed(int errorCode, String message) {
                 // Something went wrong: handle error code, maybe print the message
                 Log.e("Bridgefy", "onRegistrationFailed: " + message);
+            }
+        });
+
+
+        messagesViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MessagesViewModel.class);
+        messagesViewModel.getAllMessages().observe(this, messages -> {
+            if (messages != null && !messages.isEmpty()) {
+
+
             }
         });
     }

@@ -18,3 +18,15 @@ u
 Eapp/src/main/java/org/xsafter/bridgefytest/adapters/ChatsAdapter.java,3/f/3ff491d932ec560d1ea1e796546b52be2ff56504
 @
 app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
+l
+<app/src/main/java/org/xsafter/bridgefytest/ChatActivity.java,e/a/ea94ce8e259fbc8d56d0205155f85583fd6e8519
+q
+Aapp/src/main/java/org/xsafter/bridgefytest/model/DataMessage.java,5/c/5c9f7abd6e8192d8227c9c64ca77470b8e0e41b0
+s
+Capp/src/main/java/org/xsafter/bridgefytest/db/MessagesDatabase.java,7/6/769f9d6dcacf811a7ee986d9232a68aa02590209
+j
+:app/src/main/java/org/xsafter/bridgefytest/db/PeerDao.java,7/2/72b3487ce1cb878d5d5bf00288e4a3bb88cfd266
+m
+=app/src/main/java/org/xsafter/bridgefytest/model/Message.java,6/2/62ecc4e924f9c771b24b63c02636ae258b49fc51
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e

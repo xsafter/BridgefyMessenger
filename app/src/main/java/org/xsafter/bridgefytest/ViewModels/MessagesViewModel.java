@@ -22,7 +22,7 @@ public class MessagesViewModel extends AndroidViewModel {
         messages = messagesRepository.getAllMessages();
     }
 
-    public LiveData<List<Message>> getMessages() {
+    public LiveData<List<Message>> getAllMessages() {
         return messages;
     }
 
