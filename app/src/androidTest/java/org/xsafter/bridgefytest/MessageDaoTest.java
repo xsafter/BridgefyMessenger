@@ -3,7 +3,11 @@ package org.xsafter.bridgefytest;
 import static org.junit.Assert.assertEquals;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
@@ -11,6 +15,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.xsafter.bridgefytest.db.MessageDao;
@@ -25,6 +30,12 @@ public class MessageDaoTest {
     private MessagesDatabase messagesDatabase;
     private MessageDao messageDao;
 
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
+
+    @Rule
+    public Handler mainThreadHandler = new Handler(Looper.getMainLooper());
+
     @Before
     public void setUp() {
         Context context = ApplicationProvider.getApplicationContext();
@@ -38,19 +49,23 @@ public class MessageDaoTest {
     }
 
     @Test
-    public void insertAndGetAll() throws InterruptedException {
+    public void testInsertAndGetAll() throws InterruptedException {
         Message message = new Message("Hello, world!");
 
         messageDao.insert(message);
         LiveData<List<Message>> messagesLiveData = messageDao.getAll();
+
+
         List<Message> messages = LiveDataTestUtil.getValue(messagesLiveData);
 
+        Log.i("Messages", String.valueOf(messages.size()));
         assertEquals(1, messages.size());
+        Log.i("Messages", messages.get(0).getText());
         assertEquals("Hello, world!", messages.get(0).getText());
     }
 
     @Test
-    public void insertAndGetByDeviceName() throws InterruptedException {
+    public void testInsertAndGetByDeviceName() throws InterruptedException {
         Message message1 = new Message("Hello, device1!");
         message1.setDeviceName("device1");
 
@@ -63,12 +78,14 @@ public class MessageDaoTest {
         LiveData<List<Message>> messagesLiveData = messageDao.getByDeviceName("device1");
         List<Message> messages = LiveDataTestUtil.getValue(messagesLiveData);
 
+        Log.i("Messages", String.valueOf(messages.size()));
         assertEquals(1, messages.size());
+        Log.i("Messages", messages.get(0).getText());
         assertEquals("Hello, device1!", messages.get(0).getText());
     }
 
     @Test
-    public void insertAndGetMessagesForUser() throws InterruptedException {
+    public void testInsertAndGetMessagesForUser() throws InterruptedException {
         String userId = UUID.randomUUID().toString();
 
         Message message1 = new Message("Hello, user!");
@@ -83,7 +100,9 @@ public class MessageDaoTest {
         LiveData<List<Message>> messagesLiveData = messageDao.getMessagesForUser(userId);
         List<Message> messages = LiveDataTestUtil.getValue(messagesLiveData);
 
+        Log.i("Messages", String.valueOf(messages.size()));
         assertEquals(1, messages.size());
+        Log.i("Messages", messages.get(0).getText());
         assertEquals("Hello, user!", messages.get(0).getText());
     }
 }

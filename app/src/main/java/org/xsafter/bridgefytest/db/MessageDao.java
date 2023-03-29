@@ -18,6 +18,7 @@ public interface MessageDao {
 
     @Query("SELECT * FROM messages")
     LiveData<List<Message>> getAll();
+
     @Insert
     void insert(Message message);
 

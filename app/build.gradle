@@ -20,6 +20,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BRIDGEFY_KEY", apikeyProperties['BRIDGEFY_KEY'])
+
     }
 
     buildTypes {
@@ -33,7 +34,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+
 }
+
 
 dependencies {
 
@@ -42,13 +46,16 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation ('androidx.test.espresso:espresso-core:3.5.1'){
+        exclude module: "protobuf-lite"
+    }
+
 
     implementation 'com.bridgefy:android-sdk:2.0.2'
 
     implementation 'com.google.code.gson:gson:2.10.1'
 
-    def room_version = "2.5.0"
+    def room_version = "2.5.1"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
@@ -57,4 +64,6 @@ dependencies {
     implementation 'com.google.dagger:dagger-android-support:2.45'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.45'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.45'
+
+    androidTestImplementation "androidx.arch.core:core-testing:2.2.0"
 }

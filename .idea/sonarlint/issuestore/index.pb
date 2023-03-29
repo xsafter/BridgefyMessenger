@@ -16,8 +16,6 @@ A
 settings.gradle,0/5/05efc8b1657769a27696d478ded1e95f38737233
 u
 Eapp/src/main/java/org/xsafter/bridgefytest/adapters/ChatsAdapter.java,3/f/3ff491d932ec560d1ea1e796546b52be2ff56504
-@
-app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
 l
 <app/src/main/java/org/xsafter/bridgefytest/ChatActivity.java,e/a/ea94ce8e259fbc8d56d0205155f85583fd6e8519
 q
@@ -26,7 +24,11 @@ s
 Capp/src/main/java/org/xsafter/bridgefytest/db/MessagesDatabase.java,7/6/769f9d6dcacf811a7ee986d9232a68aa02590209
 j
 :app/src/main/java/org/xsafter/bridgefytest/db/PeerDao.java,7/2/72b3487ce1cb878d5d5bf00288e4a3bb88cfd266
-m
-=app/src/main/java/org/xsafter/bridgefytest/model/Message.java,6/2/62ecc4e924f9c771b24b63c02636ae258b49fc51
 P
  app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
+o
+?app/src/test/java/org/xsafter/bridgefytest/ExampleUnitTest.java,d/f/dfe0f9499111a54eb7459cb4edb2933ea51a38c0
+7
+gradlew,5/b/5bbfa66edb4db3c7c33c5181f43510990d3307f9
+A
+app/machinet.conf,6/2/6266cbbdc1b14a275e2f872036c3637b8c74d0d3

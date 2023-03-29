@@ -178,4 +178,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return Peer.DeviceType.values()[eventOrdinal];
     }
+
+
 }
