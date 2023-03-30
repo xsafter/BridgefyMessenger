@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         final String API_KEY = BuildConfig.BRIDGEFY_KEY;
 
-        Log.d("Bridgefy", "API_KEY: " + API_KEY);
+        //Log.d("Bridgefy", "API_KEY: " + API_KEY);
 
         textView = findViewById(R.id.textView2);
 
@@ -82,8 +82,7 @@ public class MainActivity extends AppCompatActivity {
         messagesViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MessagesViewModel.class);
         messagesViewModel.getAllMessages().observe(this, messages -> {
             if (messages != null && !messages.isEmpty()) {
-
-
+                //TODO
             }
         });
     }
@@ -98,12 +97,20 @@ public class MainActivity extends AppCompatActivity {
                 peer.setNearby(true);
                 peer.setDeviceType(extractType(message));
                 //peersAdapter.addPeer(peer);
+
+                messagesViewModel.insertPeer(peer);
+
                 Log.d("Peer", "Peer introduced itself: " + peer.getDeviceName());
                 text += "Peer introduced itself: " + peer.getDeviceName() + "\n";
                 runOnUiThread(
                         () -> textView.setText(text)
                 );
             } else {
+                org.xsafter.bridgefytest.model.Message receivedMessage = new org.xsafter.bridgefytest.model.Message(
+                        message.getContent().get("text").toString()
+                );
+                receivedMessage.setDeviceName();
+
                 String incomingMessage = (String) message.getContent().get("text");
                 Log.d("Message", "Incoming private message: " + incomingMessage);
                 LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(
@@ -178,6 +185,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return Peer.DeviceType.values()[eventOrdinal];
     }
-
-
 }

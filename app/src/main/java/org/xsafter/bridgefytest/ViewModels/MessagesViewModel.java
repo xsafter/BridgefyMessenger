@@ -29,4 +29,8 @@ public class MessagesViewModel extends AndroidViewModel {
     public void insertMessageForUser(Peer peer, Message message) {
         messagesRepository.insertMessageForUser(peer, message);
     }
+
+    public void insertPeer(Peer peer) {
+        messagesRepository.insertPeer(peer);
+    }
 }

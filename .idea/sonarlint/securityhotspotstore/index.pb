@@ -20,8 +20,6 @@ l
 <app/src/main/java/org/xsafter/bridgefytest/ChatActivity.java,e/a/ea94ce8e259fbc8d56d0205155f85583fd6e8519
 q
 Aapp/src/main/java/org/xsafter/bridgefytest/model/DataMessage.java,5/c/5c9f7abd6e8192d8227c9c64ca77470b8e0e41b0
-s
-Capp/src/main/java/org/xsafter/bridgefytest/db/MessagesDatabase.java,7/6/769f9d6dcacf811a7ee986d9232a68aa02590209
 j
 :app/src/main/java/org/xsafter/bridgefytest/db/PeerDao.java,7/2/72b3487ce1cb878d5d5bf00288e4a3bb88cfd266
 P
@@ -32,3 +30,11 @@ o
 gradlew,5/b/5bbfa66edb4db3c7c33c5181f43510990d3307f9
 A
 app/machinet.conf,6/2/6266cbbdc1b14a275e2f872036c3637b8c74d0d3
+w
+Gapp/src/androidTest/java/org/xsafter/bridgefytest/LiveDataTestUtil.java,8/f/8fa54b6adcfa3d08d0921084fab984d96b552a65
+s
+Capp/src/main/java/org/xsafter/bridgefytest/BridgefyApplication.java,6/d/6d36bb79bc2bd027082b176d7ca07cd446bad94f
+<
+build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
+s
+Capp/src/main/java/org/xsafter/bridgefytest/db/MessagesDatabase.java,7/6/769f9d6dcacf811a7ee986d9232a68aa02590209

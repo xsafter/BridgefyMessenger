@@ -46,6 +46,10 @@ public class MessagesRepository {
         new InsertMessageForUserAsyncTask(messageDao, peer).execute(message);
     }
 
+    public void insertPeer(Peer peer) {
+        new InsertPeerAsyncTask(peerDao).execute(peer);
+    }
+
     private static class InsertMessageAsyncTask extends AsyncTask<Message, Void, Void> {
         private final MessageDao messageDao;
 
@@ -72,6 +76,20 @@ public class MessagesRepository {
         @Override
         protected Void doInBackground(Message... messages) {
             messageDao.insertMessageForUser(peer, messages[0]);
+            return null;
+        }
+    }
+
+    private static class InsertPeerAsyncTask extends AsyncTask<Peer, Void, Void> {
+        private final PeerDao peerDao;
+
+        private InsertPeerAsyncTask(PeerDao peerDao) {
+            this.peerDao = peerDao;
+        }
+
+        @Override
+        protected Void doInBackground(Peer... peers) {
+            peerDao.insert(peers[0]);
             return null;
         }
     }
