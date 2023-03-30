@@ -20,7 +20,7 @@ public class Message implements DataMessage {
     @ColumnInfo(name = "text")
     private String text;
     @ColumnInfo(name = "direction")
-    private int direction;
+    private MessageType direction;
     @ColumnInfo(name = "timestamp")
     private long timestamp;
     @ColumnInfo(name = "device_name")
@@ -39,11 +39,11 @@ public class Message implements DataMessage {
         this.uuid = uuid;
     }
 
-    public int getDirection() {
+    public MessageType getDirection() {
         return direction;
     }
 
-    public void setDirection(int direction) {
+    public void setDirection(MessageType direction) {
         this.direction = direction;
     }
 

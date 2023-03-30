@@ -28,6 +28,7 @@ import com.bridgefy.sdk.client.RegistrationListener;
 import com.bridgefy.sdk.client.StateListener;
 
 import org.xsafter.bridgefytest.ViewModels.MessagesViewModel;
+import org.xsafter.bridgefytest.model.DataMessage;
 import org.xsafter.bridgefytest.model.Peer;
 
 import java.util.HashMap;
@@ -109,7 +110,9 @@ public class MainActivity extends AppCompatActivity {
                 org.xsafter.bridgefytest.model.Message receivedMessage = new org.xsafter.bridgefytest.model.Message(
                         message.getContent().get("text").toString()
                 );
-                receivedMessage.setDeviceName();
+                receivedMessage.setDirection(DataMessage.MessageType.INCOMING_MESSAGE);
+                Peer peer = new Peer(message.getSenderId(), (String) message.getContent().get("device_name"));
+                messagesViewModel.insertMessageForUser(peer, receivedMessage);
 
                 String incomingMessage = (String) message.getContent().get("text");
                 Log.d("Message", "Incoming private message: " + incomingMessage);

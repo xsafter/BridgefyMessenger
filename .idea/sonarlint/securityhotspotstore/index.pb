@@ -18,8 +18,6 @@ u
 Eapp/src/main/java/org/xsafter/bridgefytest/adapters/ChatsAdapter.java,3/f/3ff491d932ec560d1ea1e796546b52be2ff56504
 l
 <app/src/main/java/org/xsafter/bridgefytest/ChatActivity.java,e/a/ea94ce8e259fbc8d56d0205155f85583fd6e8519
-q
-Aapp/src/main/java/org/xsafter/bridgefytest/model/DataMessage.java,5/c/5c9f7abd6e8192d8227c9c64ca77470b8e0e41b0
 j
 :app/src/main/java/org/xsafter/bridgefytest/db/PeerDao.java,7/2/72b3487ce1cb878d5d5bf00288e4a3bb88cfd266
 P
