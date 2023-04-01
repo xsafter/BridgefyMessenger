@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     
     MessagesViewModel messagesViewModel;
 
+    private static final String DEVICE_NAME = "device_name";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,12 +53,14 @@ public class MainActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.textView2);
 
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_DENIED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_DENIED
+                && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)) {
+
                 ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 2);
                 Toast.makeText(this, "Please grant permission to use Bluetooth", Toast.LENGTH_LONG).show();
                 return;
-            }
+
         }
 
         // Always use the Application context to avoid leaks
@@ -92,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onMessageReceived(Message message) {
             //
-            if (message.getContent().get("device_name") != null) {
+            if (message.getContent().get(DEVICE_NAME) != null) {
                 Peer peer = new Peer(message.getSenderId(),
-                        (String) message.getContent().get("device_name"));
+                        (String) message.getContent().get(DEVICE_NAME));
                 peer.setNearby(true);
                 peer.setDeviceType(extractType(message));
                 //peersAdapter.addPeer(peer);
@@ -111,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                         message.getContent().get("text").toString()
                 );
                 receivedMessage.setDirection(DataMessage.MessageType.INCOMING_MESSAGE);
-                Peer peer = new Peer(message.getSenderId(), (String) message.getContent().get("device_name"));
+                Peer peer = new Peer(message.getSenderId(), (String) message.getContent().get(DEVICE_NAME));
                 messagesViewModel.insertMessageForUser(peer, receivedMessage);
 
                 String incomingMessage = (String) message.getContent().get("text");
@@ -131,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
             // we should not expect to have connected previously to the device that originated
             // the incoming broadcast message, so device information is included in this packet
             String incomingMsg = (String) message.getContent().get("text");
-            String deviceName  = (String) message.getContent().get("device_name");
+            String deviceName  = (String) message.getContent().get(DEVICE_NAME);
             Peer.DeviceType deviceType = extractType(message);
 
             Log.d("Broadcast", "Incoming broadcast message: " + incomingMsg);
@@ -153,14 +157,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onDeviceDetected(Device device) {
             HashMap<String, Object> map = new HashMap<>();
-            map.put("device_name", Build.MANUFACTURER + " " + Build.MODEL);
+            map.put(DEVICE_NAME, Build.MANUFACTURER + " " + Build.MODEL);
             map.put("device_type", Peer.DeviceType.ANDROID.ordinal());
             device.sendMessage(map);
         }
 
         @Override
         public void onDeviceUnavailable(Device device) {
-
+            // STOPSHIP: 31.03.2023
         }
 
         @Override
